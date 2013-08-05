@@ -39,17 +39,8 @@
 
 		<div class="container">
 
-			<div class="col-lg-3 hidden-sm">
-				<div class="list-group">
-					<a href="#" class="list-group-item active">My Profile</a>
-					<a href="#" class="list-group-item">Change Password</a>
-					<a href="#" class="list-group-item">Account History</a>
-					<a href="#" class="list-group-item">Link Print Subscription</a>
-					<a href="#" class="list-group-item">Manage Credit Card</a>
-					<a href="#" class="list-group-item">Manage Subscription</a>
-				</div>
-			</div>
-			<div class="col-lg-9">
+			<div id="side-view" class="col-lg-3 hidden-sm"></div>
+			<div id="main-view" class="col-lg-9">
 				<h1>My Profile</h1>
 				<div class="row">
 					<div class="col-lg-6">
@@ -214,11 +205,49 @@
 
 	</div>
 
+	<script type="text/template" id="sideTemplate">
+		<a id="profile" href="#" class="list-group-item active">My Profile</a>
+		<a id="password" href="#" class="list-group-item">Change Password</a>
+		<a id="history" href="#" class="list-group-item">Account History</a>
+		<a id="link" href="#" class="list-group-item">Link Print Subscription</a>
+		<a id="credit" href="#" class="list-group-item">Manage Credit Card</a>
+		<a id="subscription" href="#" class="list-group-item">Manage Subscription</a>
+	</script>
+
+	<script type="text/template" id="profileTemplate">
+		<h1>My Profile</h1>
+		<div class="row">
+			<div class="col-lg-6">
+				<address>
+					<strong>Twitter, Inc.</strong><br>
+					795 Folsom Ave, Suite 600<br>
+					San Francisco, CA 94107<br>
+					<abbr title="Phone">P:</abbr> (123) 456-7890
+				</address>
+
+				<address>
+					<strong>Full Name</strong><br>
+					<a href="mailto:#">first.last@example.com</a>
+				</address>
+			</div>
+			<div class="col-lg-6">
+				<button class="btn btn-primary">Edit my profile</button>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/template" id="loginTemplate">
+		<div class="form-group">
+			<input type="text" class="form-control" placeholder="Email Address">
+		</div>
+	</script>
+
 	<script src="js/vendor/jquery-1.10.2.min.js"></script>
 	<script src="js/vendor/bootstrap.js"></script>
 	<script src="js/vendor/underscore.js"></script>
 	<script src="js/vendor/backbone.js"></script>
 	<script src="js/vendor/backbone.marionette.min.js"></script>
 	<script src="js/app/app.js"></script>
+
 </body>
 </html>

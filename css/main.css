@@ -1,3 +1,11 @@
 #main-view h1 {
 	margin-top: 0;
 }
+
+.navbar-brand {
+	max-width: 250px;
+}
+
+.text-danger {
+	color: #b94a48 !important;
+}

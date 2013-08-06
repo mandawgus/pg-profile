@@ -30,11 +30,11 @@
 			</button>
 
 
-			<a class="navbar-brand" href="#">My PG Profile</a>
+			<a class="navbar-brand" href="#">My Post-Gazette Profile</a>
 
 			<div class="nav-collapse collapse navbar-responsive-collapse">
 				<% if (status){ %>
-				<p class="navbar-text pull-left">Signed in as <%= firstname %> <%= lastname %></p>
+				<!--<p class="navbar-text pull-left">Signed in as <%= firstname %> <%= lastname %></p>-->
 				<ul class="nav navbar-nav visible-sm">
 					<li class="active"><a href="#">My Profile</a></li>
 					<li><a href="#">Change Password</a></li>
@@ -43,7 +43,10 @@
 					<li><a href="#">Manage Subscription</a></li>
 					<li><a href="#">Link To My Print Subscription</a></li>
 				</ul>
-				<p class="navbar-text pull-right"><i class="icon-off"></i> <a id="logout" href="#" class="navbar-link">Logout</a></p>
+				<ul class="nav navbar-nav pull-right">
+					<li><a id="logout" href="#" class="text-danger">Logout <i class="icon-off"></i></a></li>
+				</ul>
+				<p class="navbar-text pull-right">Signed in as <%= firstname %> <%= lastname %></p>
 				<%}%>
 			</div>
 

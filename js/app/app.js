@@ -32,7 +32,8 @@ var LoggedInStatus = Backbone.Model.extend({
 	defaults:{
 		status: false,
 		firstname: "",
-		lastname: ""
+		lastname: "",
+		planID: 5
 	}
 });
 
@@ -80,7 +81,7 @@ var LoginView = Backbone.Marionette.ItemView.extend({
 	},
 	loggedIn: function(){
 		console.log("logged in");
-		PGProfile.loggedInModel.set({status: true, firstname: "Firstname", lastname: "Lastname"});
+		PGProfile.loggedInModel.set({status: true, firstname: "Dave", lastname: "Esaias"});
 		PGProfile.navProfile();
 	},
 	failedAttempt: function(){

@@ -23,6 +23,9 @@ var PGProfile = new Backbone.Marionette.Application({
 	},
 	navLogout: function(){
 		PGProfile.router.navigate("logout", true);
+	},
+	checkStatus: function(){
+		console.log("check status");
 	}
 });
 
@@ -429,6 +432,7 @@ PGProfile.on("initialize:after", function(){
 
 PGProfile.Controller = Marionette.Controller.extend({
 	index: function(){
+		PGProfile.checkStatus();
 		PGProfile.appLayout.navView.show(PGProfile.navLayout);
 		if ($.cookie(PGProfile.cookieName)){
 			PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
@@ -441,31 +445,39 @@ PGProfile.Controller = Marionette.Controller.extend({
 		}
 	},
 	login: function(){
+		PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
 	},
 	myProfile: function(){
+		PGProfile.checkStatus();
 		PGProfile.appLayout.navView.show(PGProfile.navLayout);
 		PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
 		PGProfile.appLayout.mainView.show(PGProfile.profileLayout);
 	},
 	password: function(){
+		PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.changePassLayout);
 	},
 	accountHistory: function(){
+		PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.accountHistoryLayout);
 		PGProfile.acctHistory.fetch();
 	},
 	linkAccount: function(){
+		PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.linkPrintLayout);
 	},
 	creditCard: function(){
+		PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.creditCardLayout);
 	},
 	subscription: function(){
+		PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.subscriptionsLayout);
 		PGProfile.subscriptions.fetch();
 	},
 	logout: function(){
+		PGProfile.checkStatus();
 		$.cookie(PGProfile.cookieName, "", {expires: 7, path: '/'});
 		PGProfile.loggedInModel.set({status: false, firstname: "", lastname: ""});
 		PGProfile.appLayout.sideView.close();

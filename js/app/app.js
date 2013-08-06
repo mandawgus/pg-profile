@@ -1,5 +1,5 @@
-
 var PGProfile = new Backbone.Marionette.Application({
+	cookieName: "xp_PGPP",
 	navHome: function(){
 		PGProfile.router.navigate("", true);
 	},
@@ -26,12 +26,20 @@ var PGProfile = new Backbone.Marionette.Application({
 	}
 });
 
+
+//MODELS & COLLECTIONS
 var LoggedInStatus = Backbone.Model.extend({
 	defaults:{
 		status: false,
 		firstname: "",
 		lastname: ""
 	}
+});
+
+var AccountHist = Backbone.Model.extend({});
+var AccountHistCollection = Backbone.Collection.extend({
+	model: AccountHist,
+	url: 'https://stage.syncaccess.net/po/pit/api/svcs/availableplans?format=json'
 });
 
 var Subscription = Backbone.Model.extend({});
@@ -42,7 +50,7 @@ var Subscriptions = Backbone.Collection.extend({
 
 
 
-
+//VIEWS
 var LoginView = Backbone.Marionette.ItemView.extend({
 	template: '#loginTemplate',
 	className: 'row',
@@ -50,7 +58,7 @@ var LoginView = Backbone.Marionette.ItemView.extend({
 		'click #loginBtn' : 'loginUser'
 	},
 	initialize: function(){
-		var hasCookie = Boolean($.cookie('_pgp'));
+		var hasCookie = Boolean($.cookie(PGProfile.cookieName));
 		if(hasCookie){
 			console.log("has Cookie");
 			this.loggedIn();
@@ -66,7 +74,7 @@ var LoginView = Backbone.Marionette.ItemView.extend({
 	loginUser: function(){
 		console.log(this.ui.email.val(), this.ui.pass.val());
 		if (this.ui.email.val() === 'test' && this.ui.pass.val() === 'test'){
-			$.cookie('_pgp', "sessionid", {expires: 7, path: '/'});
+			$.cookie(PGProfile.cookieName, "sessionid", {expires: 7, path: '/'});
 			this.loggedIn();
 		}
 	},
@@ -79,10 +87,7 @@ var LoginView = Backbone.Marionette.ItemView.extend({
 
 	}
 });
-var LoggedOutView = Backbone.View.extend({
-	template: '#navLoggedOut',
-	className: 'navbar'
-});
+
 
 var NavView = Backbone.Marionette.ItemView.extend({
 	template: '#navTemplate',
@@ -159,20 +164,38 @@ var CreditCardView = Backbone.Marionette.ItemView.extend({
 	className: 'row'
 });
 
-var SubscriptionView = Backbone.Marionette.ItemView.extend({
-	template: '#subscriptionTemplate'
-})
-
-var SubscriptionsView = Backbone.Marionette.CollectionView.extend({
-	className: 'row',
-	itemView: SubscriptionView
-});
-
 var LinkPrintView = Backbone.Marionette.ItemView.extend({
 	template: '#linkPrintTemplate',
 	className: 'row'
 });
 
+var ErrorView = Backbone.Marionette.ItemView.extend({
+	template: '#noSubs'
+});
+var SubscriptionView = Backbone.Marionette.ItemView.extend({
+	template: '#subscriptionTemplate',
+	tagName: 'tr'
+});
+
+var SubscriptionsView = Backbone.Marionette.CompositeView.extend({
+	template: '#subscriptionsTemplate',
+	itemView: SubscriptionView,
+	itemViewContainer: "tbody"
+});
+
+
+
+
+var AccountRowView = Backbone.Marionette.ItemView.extend({
+	tagName: 'tr',
+	template: '#accountRowTemplate'
+});
+
+var AccountTableView = Backbone.Marionette.CompositeView.extend({
+	template: '#accountTableTemplate',
+	itemView: AccountRowView,
+	itemViewContainer: 'tbody'
+});
 
 
 
@@ -183,8 +206,195 @@ PGProfile.addInitializer(function(){
 	});
 
 	//Data
-	PGProfile.subscriptions = new Subscriptions();
+	var exampleAccountData = [
+		{id: 1234, details: "Details...", timestamp: new Date()},
+		{id: 1235, details: "Details...", timestamp: new Date()},
+		{id: 1236, details: "Details...", timestamp: new Date()},
+		{id: 1237, details: "Details...", timestamp: new Date()}
+	];
+
+	var exampleSubscriptionsData = [
+		{
+			"planID": 5,
+			"isActive": true,
+			"baseRate": 4.95,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "4d",
+			"planLength": 0,
+			"planName": "Weekender Print with Full Digital Access",
+			"planTerm": "Weeks(s)",
+			"publication": "pit",
+			"requiresCardOnFile": true,
+			"totalCost": 4.95,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 3,
+			"isActive": true,
+			"baseRate": 3.95,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "5d",
+			"planLength": 0,
+			"planName": "Digital Only",
+			"planTerm": "Weeks(s)",
+			"publication": "pit",
+			"requiresCardOnFile": true,
+			"totalCost": 3.95,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 8,
+			"isActive": false,
+			"baseRate": 0,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "5day",
+			"planLength": 0,
+			"planName": "5Day Print with Full Digital Access",
+			"planTerm": "Weeks(s)",
+			"publication": "pit",
+			"requiresCardOnFile": false,
+			"totalCost": 0,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 9,
+			"isActive": false,
+			"baseRate": 0,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "6day",
+			"planLength": 0,
+			"planName": "6Day Print with Full Digital Access",
+			"planTerm": "Weeks(s)",
+			"publication": "pit",
+			"requiresCardOnFile": false,
+			"totalCost": 0,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 10,
+			"isActive": false,
+			"baseRate": 0,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "7d",
+			"planLength": 0,
+			"planName": "Digital Only w/Steelers App",
+			"planTerm": "Month(s)",
+			"publication": "pit",
+			"requiresCardOnFile": false,
+			"totalCost": 0,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 2,
+			"isActive": true,
+			"baseRate": 5.95,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "7day",
+			"planLength": 0,
+			"planName": "7Day Print with Full Digital Access",
+			"planTerm": "Weeks(s)",
+			"publication": "pit",
+			"requiresCardOnFile": true,
+			"totalCost": 5.95,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 11,
+			"isActive": true,
+			"baseRate": 0,
+			"description": "Steelers, Pens (not avail), Pirates (not avail)",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "App1",
+			"planLength": 0,
+			"planName": "Sports App Bundle",
+			"planTerm": "Month(s)",
+			"publication": "pit",
+			"requiresCardOnFile": false,
+			"totalCost": 0,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 7,
+			"isActive": true,
+			"baseRate": 3.95,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "SS",
+			"planLength": 0,
+			"planName": "Sat/Sun Print with Full Digital Access",
+			"planTerm": "Weeks(s)",
+			"publication": "pit",
+			"requiresCardOnFile": true,
+			"totalCost": 3.95,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 4,
+			"isActive": true,
+			"baseRate": 2.95,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "SU",
+			"planLength": 0,
+			"planName": "Sunday Only Print with Full Digital Access",
+			"planTerm": "Weeks(s)",
+			"publication": "pit",
+			"requiresCardOnFile": true,
+			"totalCost": 2.95,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 1,
+			"isActive": true,
+			"baseRate": 0.1,
+			"description": "This is a test plan",
+			"fullPubName": "Test Pub For Whiz DONT CHANGE (P1)",
+			"planCode": "TEST",
+			"planLength": 5,
+			"planName": "TestPlan",
+			"planTerm": "Day(s)",
+			"publication": "P1",
+			"requiresCardOnFile": true,
+			"totalCost": 0.1,
+			"offerToPrintSubscribers": false,
+			"offerToDigitalSubscribers": true
+		},
+		{
+			"planID": 6,
+			"isActive": true,
+			"baseRate": 3.95,
+			"description": "",
+			"fullPubName": "Pittsburgh (pit)",
+			"planCode": "TS",
+			"planLength": 0,
+			"planName": "Thu/Sunday Print with Full Digital Access",
+			"planTerm": "Weeks(s)",
+			"publication": "pit",
+			"requiresCardOnFile": true,
+			"totalCost": 3.95,
+			"offerToPrintSubscribers": true,
+			"offerToDigitalSubscribers": true
+		}
+	];
+
 	PGProfile.loggedInModel = new LoggedInStatus();
+	PGProfile.subscriptions = new Subscriptions(exampleSubscriptionsData);
+	PGProfile.acctHistory = new AccountHistCollection(exampleAccountData);
 
 	//Views
 	PGProfile.navLayout = new NavView({model: PGProfile.loggedInModel});
@@ -194,7 +404,9 @@ PGProfile.addInitializer(function(){
 	PGProfile.changePassLayout = new ChangePasswordView();
 	PGProfile.creditCardLayout = new CreditCardView();
 	PGProfile.subscriptionsLayout = new SubscriptionsView({collection: PGProfile.subscriptions});
+	PGProfile.accountHistoryLayout = new AccountTableView({collection: PGProfile.acctHistory});
 	PGProfile.linkPrintLayout = new LinkPrintView({collection: PGProfile.loggedInStatus});
+
 
 	PGProfile.AppLayout = Marionette.Layout.extend({
 		regions: {
@@ -204,24 +416,20 @@ PGProfile.addInitializer(function(){
 		}
 	});
 
-	//PGProfile.SubscriptionsLayout = Marionette.Layout.extend({});
 
 	PGProfile.appLayout = new PGProfile.AppLayout({ el: '#app' });
+
 });
 
 PGProfile.on("initialize:after", function(){
 	//Backbone.history.start({pushState: true, root: 'pg-profile'});
 	Backbone.history.start();
-	console.log("after:init");
-
 });
 
 PGProfile.Controller = Marionette.Controller.extend({
 	index: function(){
-		console.log(Boolean($.cookie('_pgp')));
-		console.log($.cookie('_pgp'));
 		PGProfile.appLayout.navView.show(PGProfile.navLayout);
-		if ($.cookie('_pgp')){
+		if ($.cookie(PGProfile.cookieName)){
 			PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
 			PGProfile.appLayout.mainView.show(PGProfile.profileLayout);
 
@@ -233,7 +441,6 @@ PGProfile.Controller = Marionette.Controller.extend({
 	},
 	login: function(){
 		PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
-		//PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
 	},
 	myProfile: function(){
 		PGProfile.appLayout.navView.show(PGProfile.navLayout);
@@ -242,25 +449,23 @@ PGProfile.Controller = Marionette.Controller.extend({
 	},
 	password: function(){
 		PGProfile.appLayout.mainView.show(PGProfile.changePassLayout);
-		//PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
 	},
 	accountHistory: function(){
-		//PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
-		//PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
+		PGProfile.appLayout.mainView.show(PGProfile.accountHistoryLayout);
+		PGProfile.acctHistory.fetch();
 	},
 	linkAccount: function(){
 		PGProfile.appLayout.mainView.show(PGProfile.linkPrintLayout);
 	},
 	creditCard: function(){
 		PGProfile.appLayout.mainView.show(PGProfile.creditCardLayout);
-		//PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
 	},
 	subscription: function(){
 		PGProfile.appLayout.mainView.show(PGProfile.subscriptionsLayout);
-		//PGProfile.subscriptions.fetch();
+		PGProfile.subscriptions.fetch();
 	},
 	logout: function(){
-		$.cookie('_pgp', "", {expires: 7, path: '/'});
+		$.cookie(PGProfile.cookieName, "", {expires: 7, path: '/'});
 		PGProfile.loggedInModel.set({status: false, firstname: "", lastname: ""});
 		PGProfile.appLayout.sideView.close();
 		PGProfile.appLayout.mainView.show(PGProfile.loginLayout);

@@ -78,7 +78,35 @@
 			</address>
 
 			<div class="form-group">
-				<button class="btn btn-primary">Edit my profile</button>
+				<button id="editProfileBtn" class="btn btn-primary">Edit my profile</button>
+			</div>
+		</div>
+		<div class="col-lg-6"></div>
+	</script>
+
+	<script type="text/template" id="editProfileTemplate">
+		<div class="col-lg-6">
+			<h1>My Profile</h1>
+			<div class="form-group">
+				<input id="street" class="form-control" placeholder="Street Address">
+			</div>
+			<div class="form-group">
+				<input id="city" class="form-control" placeholder="City">
+			</div>
+			<div class="form-group">
+				<input id="state" class="form-control" placeholder="State">
+			</div>
+			<div class="form-group">
+				<input id="zip" class="form-control" placeholder="Zipcode">
+			</div>
+			<div class="form-group">
+				<input id="phone" class="form-control" placeholder="Phone Number">
+			</div>
+			<div class="form-group">
+				<input id="email" class="form-control" placeholder="Email Address">
+			</div>
+			<div class="form-group">
+				<button id="submitEditBtn" class="btn btn-primary">Submit Changes</button>
 			</div>
 		</div>
 		<div class="col-lg-6"></div>
@@ -115,7 +143,7 @@
 			</address>
 
 			<div class="form-group">
-				<button class="btn btn-primary">Edit Credit Card Details</button>
+				<button id="editCardBtn" class="btn btn-primary">Edit Credit Card Details</button>
 			</div>
 			
 		</div>
@@ -153,12 +181,40 @@
 			</div>
 
 			<div class="form-group">
-				<button class="btn btn-primary">Enroll in EZ-PAY</button>
+				<button id="ezpayBtn" class="btn btn-primary">Enroll in EZ-PAY</button>
 			</div>
 		</div>
 	</script>
 
-
+	<script type="text/template" id="editCreditCardTemplate">
+		<div class="col-lg-6">
+			<h3>Edit Credit Card</h3>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Name on card">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Card Number">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="">
+			</div>
+		</div>
+	</script>
 
 	<script type="text/template" id="noSubs">
 		Error
@@ -189,13 +245,6 @@
 	</script>
 
 
-
-
-
-
-
-	
-
 	<script type="text/template" id="accountRowTemplate">
 		<td><%= id %></td>
 		<td><%= details %></td>
@@ -219,13 +268,6 @@
 	</script>
 
 
-
-
-
-
-
-
-
 	<script type="text/template" id="linkPrintTemplate">
 		<div class="col-6">
 			<h1>Link Print Subscription</h1>
@@ -236,7 +278,7 @@
 				<input id="pass" type="password" class="form-control" placeholder="Password">
 			</div>
 			<div class="form-group">
-			<button id="loginBtn" class="btn btn-primary">Login</button>
+			<button id="loginBtn" class="btn btn-primary">Link Accounts</button>
 			</div>
 		</div>
 		<div class="col-6"></div>
@@ -257,10 +299,7 @@
 		</div>
 		<div class="col-6"></div>
 	</script>
-
-
 	
-
 
 	<script src="js/vendor/jquery-1.10.2.min.js"></script>
 	<script src="js/vendor/bootstrap.js"></script>

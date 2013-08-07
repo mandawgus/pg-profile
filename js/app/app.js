@@ -4,7 +4,10 @@ var PGProfile = new Backbone.Marionette.Application({
 		PGProfile.router.navigate("", true);
 	},
 	navProfile: function(){
-		PGProfile.router.navigate("myProfile", true);
+		PGProfile.router.navigate("profile", true);
+	},
+	navEditProfile: function(){
+		PGProfile.router.navigate("profile/edit", true);
 	},
 	navPass: function(){
 		PGProfile.router.navigate("password", true);
@@ -17,6 +20,9 @@ var PGProfile = new Backbone.Marionette.Application({
 	},
 	navCredit: function(){
 		PGProfile.router.navigate("cc", true);
+	},
+	navEditCredit: function(){
+		PGProfile.router.navigate("cc/edit", true);
 	},
 	navSub: function(){
 		PGProfile.router.navigate("subscription", true);
@@ -154,17 +160,54 @@ var SideView = Backbone.Marionette.ItemView.extend({
 
 var ProfileView = Backbone.Marionette.ItemView.extend({
 	template: '#profileTemplate',
+	className: 'row',
+	events: {
+		'click #editProfileBtn': 'editProfile'
+	},
+	editProfile: function(e){
+		e.preventDefault();
+		PGProfile.navEditProfile();
+	},
+	onRender: function(){
+		this.delegateEvents();
+	}
+});
+
+var EditProfileView = Backbone.Marionette.ItemView.extend({
+	template: '#editProfileTemplate',
 	className: 'row'
 });
 
+
+var CreditCardView = Backbone.Marionette.ItemView.extend({
+	template: '#creditCardTemplate',
+	className: 'row',
+	events: {
+		'click #editCardBtn': 'editCard',
+		'click #ezpayBtn': 'ezpay'
+	},
+	editCard: function(e){
+		e.preventDefault();
+		console.log("Edit card");
+		PGProfile.navEditCredit();
+
+	},
+	ezpay: function(e){
+		e.preventDefault();
+		console.log('ezpay');
+	},
+	onRender: function(){
+		this.delegateEvents();
+	}
+});
 
 var ChangePasswordView = Backbone.Marionette.ItemView.extend({
 	template: '#changePasswordTemplate',
 	className: 'row'
 });
 
-var CreditCardView = Backbone.Marionette.ItemView.extend({
-	template: '#creditCardTemplate',
+var EditCreditCardView = Backbone.Marionette.ItemView.extend({
+	template: '#editCreditCardTemplate',
 	className: 'row'
 });
 
@@ -405,8 +448,10 @@ PGProfile.addInitializer(function(){
 	PGProfile.loginLayout = new LoginView();
 	PGProfile.sideLayout = new SideView();
 	PGProfile.profileLayout = new ProfileView();
+	PGProfile.editProfileLayout = new EditProfileView();
 	PGProfile.changePassLayout = new ChangePasswordView();
 	PGProfile.creditCardLayout = new CreditCardView();
+	PGProfile.editCreditCardLayout = new EditCreditCardView();
 	PGProfile.subscriptionsLayout = new SubscriptionsView({collection: PGProfile.subscriptions});
 	PGProfile.accountHistoryLayout = new AccountTableView({collection: PGProfile.acctHistory});
 	PGProfile.linkPrintLayout = new LinkPrintView({collection: PGProfile.loggedInStatus});
@@ -449,35 +494,43 @@ PGProfile.Controller = Marionette.Controller.extend({
 		PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
 	},
 	myProfile: function(){
-		PGProfile.checkStatus();
-		PGProfile.appLayout.navView.show(PGProfile.navLayout);
+		//PGProfile.checkStatus();
+		//PGProfile.appLayout.navView.show(PGProfile.navLayout);
 		PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
 		PGProfile.appLayout.mainView.show(PGProfile.profileLayout);
 	},
+	editProfile: function(){
+		//PGProfile.checkStatus();
+		PGProfile.appLayout.mainView.show(PGProfile.editProfileLayout);
+	},
 	password: function(){
-		PGProfile.checkStatus();
+		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.changePassLayout);
 	},
 	accountHistory: function(){
-		PGProfile.checkStatus();
+		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.accountHistoryLayout);
 		PGProfile.acctHistory.fetch();
 	},
 	linkAccount: function(){
-		PGProfile.checkStatus();
+		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.linkPrintLayout);
 	},
 	creditCard: function(){
-		PGProfile.checkStatus();
+		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.creditCardLayout);
 	},
+	goeditCard: function(){
+		//PGProfile.checkStatus();
+		PGProfile.appLayout.mainView.show(PGProfile.editCreditCardLayout);
+	},
 	subscription: function(){
-		PGProfile.checkStatus();
+		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.subscriptionsLayout);
 		PGProfile.subscriptions.fetch();
 	},
 	logout: function(){
-		PGProfile.checkStatus();
+		//PGProfile.checkStatus();
 		$.cookie(PGProfile.cookieName, "", {expires: 7, path: '/'});
 		PGProfile.loggedInModel.set({status: false, firstname: "", lastname: ""});
 		PGProfile.appLayout.sideView.close();
@@ -489,17 +542,20 @@ PGProfile.Controller = Marionette.Controller.extend({
 
 PGProfile.Router = Marionette.AppRouter.extend({
 	initialize: function(){
+		console.log(window.location.hash);
 		window.location.hash = '';
 		return this;
 	},
 	appRoutes: {
 		"": "index",
 		"login": "login",
-		"myProfile": "myProfile",
+		"profile": "myProfile",
+		"profile/edit": "editProfile",
 		"password": "password",
 		"history": "accountHistory",
 		"link": "linkAccount",
 		"cc": "creditCard",
+		"cc/edit": "goeditCard",
 		"subscription": "subscription",
 		"logout": "logout"
 	}

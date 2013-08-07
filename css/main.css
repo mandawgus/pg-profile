@@ -9,3 +9,7 @@
 .text-danger {
 	color: #b94a48 !important;
 }
+
+.w50 {
+	width: 49%;
+}

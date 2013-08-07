@@ -66,16 +66,14 @@
 		<div class="col-sm-12 col-lg-6">
 			<h1>My Profile</h1>
 			<address>
-				<strong>Twitter, Inc.</strong><br>
-				795 Folsom Ave, Suite 600<br>
-				San Francisco, CA 94107<br>
-				<abbr title="Phone">P:</abbr> (123) 456-7890
+				<strong><%= firstname %> <%= lastname %></strong><br />
+				<%= address %><br />
+				<%= city %>, <%= state %> <%= zip %><br />
+				<%= phone %><br />
+				<%= email %>
 			</address>
 
-			<address>
-				<strong>Full Name</strong><br>
-				<a href="mailto:#">first.last@example.com</a>
-			</address>
+			
 
 			<div class="form-group">
 				<button id="editProfileBtn" class="btn btn-primary">Edit my profile</button>
@@ -88,25 +86,26 @@
 		<div class="col-sm-12 col-lg-6">
 			<h1>My Profile</h1>
 			<div class="form-group">
-				<input id="street" class="form-control" placeholder="Street Address">
+				<input id="street" class="form-control" placeholder="Street Address" value="<%= address %>">
 			</div>
 			<div class="form-group">
-				<input id="city" class="form-control" placeholder="City">
+				<input id="city" class="form-control" placeholder="City" value="<%= city %>">
 			</div>
 			<div class="form-group">
-				<input id="state" class="form-control" placeholder="State">
+				<input id="state" class="form-control" placeholder="State" value="<%= state %>">
 			</div>
 			<div class="form-group">
-				<input id="zip" class="form-control" placeholder="Zipcode">
+				<input id="zip" class="form-control" placeholder="Zipcode" value="<%= zip %>">
 			</div>
 			<div class="form-group">
-				<input id="phone" class="form-control" placeholder="Phone Number">
+				<input id="phone" class="form-control" placeholder="Phone Number" value="<%= phone %>">
 			</div>
 			<div class="form-group">
-				<input id="email" class="form-control" placeholder="Email Address">
+				<input id="email" class="form-control" placeholder="Email Address" value="<%= email %>">
 			</div>
 			<div class="form-group">
-				<button id="submitEditBtn" class="btn btn-primary">Submit Changes</button>
+				<button id="submitEditBtn" class="btn btn-default">Submit Changes</button>
+				<button id="cancelBtn" class="btn btn-danger">Cancel</button>
 			</div>
 		</div>
 		<div class="col-sm-12 col-lg-6"></div>
@@ -193,14 +192,36 @@
 				<input type="text" class="form-control" placeholder="Name on card">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Card Number">
+				<input type="text" class="form-control" placeholder="Credit Card Number">
 			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="">
+			
+			<div class="row">
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<select class="form-control">
+							<option select>Expiration Month</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-12 col-lg-6">
+					<div class="form-group">
+						<select class="form-control">
+							<option select>Expiration Year</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+					</div>
+				</div>
 			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="">
-			</div>
+
+
+
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="">
 			</div>
@@ -216,6 +237,7 @@
 		</div>
 		<div class="col-sm-12 col-lg-6"></div>
 	</script>
+
 
 	<script type="text/template" id="noSubs">
 		Error
@@ -273,10 +295,10 @@
 		<div class="col-sm-12 col-lg-6">
 			<h1>Link Print Subscription</h1>
 			<div class="form-group">
-				<input id="email" type="text" class="form-control" placeholder="Email Address">
+				<input id="email" type="text" class="form-control" placeholder="Print Account #">
 			</div>
 			<div class="form-group">
-				<input id="pass" type="password" class="form-control" placeholder="Password">
+				<input id="pass" type="text" class="form-control" placeholder="Street Number (e.g. 2073)">
 			</div>
 			<div class="form-group">
 			<button id="loginBtn" class="btn btn-primary">Link Accounts</button>
@@ -284,6 +306,7 @@
 		</div>
 		<div class="col-sm-12 col-lg-6"></div>
 	</script>
+
 
 	<script type="text/template" id="loginTemplate">
 		<div class="col-sm-12 col-lg-6">

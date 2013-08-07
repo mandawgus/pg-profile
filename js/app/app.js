@@ -90,7 +90,17 @@ var LoginView = Backbone.Marionette.ItemView.extend({
 	},
 	loggedIn: function(){
 		console.log("logged in");
-		PGProfile.loggedInModel.set({status: true, firstname: "Dave", lastname: "Esaias"});
+		PGProfile.loggedInModel.set({
+			status: true,
+			firstname: "Dave",
+			lastname: "Esaias",
+			address: "123 Any Street",
+			city: "Pittsburgh",
+			state: "PA",
+			zip: "15232",
+			phone: "412-555-1212",
+			email: "test@test.com"
+		});
 		PGProfile.navProfile();
 	},
 	failedAttempt: function(){
@@ -175,7 +185,22 @@ var ProfileView = Backbone.Marionette.ItemView.extend({
 
 var EditProfileView = Backbone.Marionette.ItemView.extend({
 	template: '#editProfileTemplate',
-	className: 'row'
+	className: 'row',
+	events: {
+		'click #submitEditBtn': 'submitChanges',
+		'click #cancelBtn': 'cancelChanges'
+	},
+	submitChanges: function(e){
+		e.preventDefault();
+		console.log("submit changes");
+	},
+	cancelChanges: function(e){
+		e.preventDefault();
+		PGProfile.navProfile();
+	},
+	onRender: function(){
+		this.delegateEvents();
+	}
 });
 
 
@@ -447,8 +472,8 @@ PGProfile.addInitializer(function(){
 	PGProfile.navLayout = new NavView({model: PGProfile.loggedInModel});
 	PGProfile.loginLayout = new LoginView();
 	PGProfile.sideLayout = new SideView();
-	PGProfile.profileLayout = new ProfileView();
-	PGProfile.editProfileLayout = new EditProfileView();
+	PGProfile.profileLayout = new ProfileView({model: PGProfile.loggedInModel });
+	PGProfile.editProfileLayout = new EditProfileView({ model: PGProfile.loggedInModel });
 	PGProfile.changePassLayout = new ChangePasswordView();
 	PGProfile.creditCardLayout = new CreditCardView();
 	PGProfile.editCreditCardLayout = new EditCreditCardView();

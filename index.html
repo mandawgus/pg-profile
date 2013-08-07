@@ -67,10 +67,10 @@
 			<h1>My Profile</h1>
 			<address>
 				<strong><%= firstname %> <%= lastname %></strong><br />
+				<%= email %><br />
 				<%= address %><br />
 				<%= city %>, <%= state %> <%= zip %><br />
-				<%= phone %><br />
-				<%= email %>
+				<%= phone %>
 			</address>
 
 			
@@ -104,8 +104,8 @@
 				<input id="email" class="form-control" placeholder="Email Address" value="<%= email %>">
 			</div>
 			<div class="form-group">
-				<button id="submitEditBtn" class="btn btn-default">Submit Changes</button>
 				<button id="cancelBtn" class="btn btn-danger">Cancel</button>
+				<button id="submitEditBtn" class="btn btn-primary">Submit Changes</button>
 			</div>
 		</div>
 		<div class="col-sm-12 col-lg-6"></div>
@@ -192,7 +192,7 @@
 				<input type="text" class="form-control" placeholder="Name on card">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Credit Card Number">
+				<input type="text" class="form-control" placeholder="Card Number">
 			</div>
 			
 			<div class="row">
@@ -220,19 +220,25 @@
 				</div>
 			</div>
 
-
-
+			<h3>Billing Address</h3>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="">
+				<input id="sameAsProfile" type="checkbox"> Use address on file
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="">
+				<input type="text" class="form-control" placeholder="Address">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="">
+				<input type="text" class="form-control" placeholder="City">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="">
+				<input type="text" class="form-control" placeholder="State">
+			</div>
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Zipcode">
+			</div>
+			<div class="form-group">
+				<button id="cancelBtn" class="btn btn-danger">Cancel</button>
+				<button id="submitBtn" class="btn btn-primary">Submit</button>
 			</div>
 		</div>
 		<div class="col-sm-12 col-lg-6"></div>
@@ -301,7 +307,7 @@
 				<input id="pass" type="text" class="form-control" placeholder="Street Number (e.g. 2073)">
 			</div>
 			<div class="form-group">
-			<button id="loginBtn" class="btn btn-primary">Link Accounts</button>
+			<button id="loginBtn" class="btn btn-primary">Link my accounts</button>
 			</div>
 		</div>
 		<div class="col-sm-12 col-lg-6"></div>

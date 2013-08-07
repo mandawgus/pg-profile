@@ -588,4 +588,4 @@ PGProfile.Router = Marionette.AppRouter.extend({
 
 $(function(){
 	PGProfile.start();
-})
+});

@@ -32,6 +32,7 @@ var PGProfile = new Backbone.Marionette.Application({
 	},
 	checkStatus: function(){
 		console.log("check status");
+		
 	}
 });
 
@@ -226,13 +227,27 @@ var CreditCardView = Backbone.Marionette.ItemView.extend({
 	}
 });
 
-var ChangePasswordView = Backbone.Marionette.ItemView.extend({
-	template: '#changePasswordTemplate',
-	className: 'row'
-});
-
 var EditCreditCardView = Backbone.Marionette.ItemView.extend({
 	template: '#editCreditCardTemplate',
+	className: 'row',
+	events: {
+		'click #cancelBtn': 'cancelChange',
+		'click #submitBtn': 'submitChange'
+	},
+	cancelChange: function(e){
+		e.preventDefault();
+		PGProfile.navCredit();
+	},
+	submitChange: function(e){
+		console.log("submit cc change");
+	},
+	onRender: function(){
+		this.delegateEvents();
+	}
+});
+
+var ChangePasswordView = Backbone.Marionette.ItemView.extend({
+	template: '#changePasswordTemplate',
 	className: 'row'
 });
 

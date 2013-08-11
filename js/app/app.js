@@ -37,6 +37,7 @@ var PGProfile = new Backbone.Marionette.Application({
 });
 
 
+
 //MODELS & COLLECTIONS
 var LoggedInStatus = Backbone.Model.extend({
 	defaults:{

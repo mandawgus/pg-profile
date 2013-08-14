@@ -14,56 +14,55 @@
 
 		<div class="container">
 
-			<div id="side-view" class="col-lg-3 hidden-sm"></div>
-			<div id="main-view" class="col-lg-9"></div>
+			<div id="side-view" class="col-sm-4 col-md-3 col-lg-3 hidden-xs"></div>
+			<div id="main-view" class="col-sm-8 col-md-9 col-lg-9"></div>
 		</div>
 
 	</div>
 
-	
 	<script type="text/template" id="navTemplate">
-		<div class="container">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
+		<nav class="navbar navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">My Post-Gazette Profile</a>
+			</div>
 
-
-			<a class="navbar-brand" href="#">My Post-Gazette Profile</a>
-
-			<div class="nav-collapse collapse navbar-responsive-collapse">
-				<% if (status){ %>
-				<!--<p class="navbar-text pull-left">Signed in as <%= firstname %> <%= lastname %></p>-->
-				<ul class="nav navbar-nav visible-sm">
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav visible-xs">
 					<li class="active"><a href="#">My Profile</a></li>
 					<li><a href="#">Change Password</a></li>
 					<li><a href="#">Account History</a></li>
-					<li><a href="#">My Credit Card Information</a></li>
-					<li><a href="#">Manage Subscription</a></li>
-					<li><a href="#">Link To My Print Subscription</a></li>
+					<li><a href="#">Billing Information</a></li>
+					<li><a href="#">Manage My Subscription</a></li>
+					<li><a href="#">Link Print Subscription</a></li>
 				</ul>
-				<ul class="nav navbar-nav pull-right">
+
+				<ul class="nav navbar-nav navbar-right hidden-sm">
+					<li><a href="#">Signed in as <%= firstname %> <%= lastname %></a></li>
 					<li><a id="logout" href="#" class="text-danger">Logout <i class="icon-off"></i></a></li>
 				</ul>
-				<p class="navbar-text pull-right">Signed in as <%= firstname %> <%= lastname %></p>
-				<%}%>
 			</div>
-
-		</div>
+		</nav>
 	</script>
+
+	
 
 	<script type="text/template" id="sideTemplate">
 		<a id="profile" href="#" class="list-group-item active">My Profile</a>
 		<a id="password" href="#" class="list-group-item">Change Password</a>
 		<a id="history" href="#" class="list-group-item">Account History</a>
-		<a id="credit" href="#" class="list-group-item">Credit Card Information</a>
+		<a id="credit" href="#" class="list-group-item">Billing Information</a>
 		<a id="subscription" href="#" class="list-group-item">Manage My Subscription</a>
 		<a id="link" href="#" class="list-group-item">Link Print Subscription</a>
 	</script>
 
 	<script type="text/template" id="profileTemplate">
-		<div class="col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-md-6 col-lg-6">
 			<h1>My Profile</h1>
 			<address>
 				<strong><%= firstname %> <%= lastname %></strong><br />
@@ -79,11 +78,11 @@
 				<button id="editProfileBtn" class="btn btn-primary">Edit my profile</button>
 			</div>
 		</div>
-		<div class="col-sm-12 col-lg-6"></div>
+		<div class="col-xs-6 col-md-6 col-lg-6">
 	</script>
 
 	<script type="text/template" id="editProfileTemplate">
-		<div class="col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-md-6 col-lg-6">
 			<h1>My Profile</h1>
 			<div class="form-group">
 				<input id="street" class="form-control" placeholder="Street Address" value="<%= address %>">
@@ -108,11 +107,11 @@
 				<button id="submitEditBtn" class="btn btn-primary">Submit Changes</button>
 			</div>
 		</div>
-		<div class="col-sm-12 col-lg-6"></div>
+		<div class="col-xs-12 col-md-6 col-lg-6">
 	</script>
 
 	<script type="text/template" id="changePasswordTemplate">
-		<div class="col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-md-6 col-lg-6">
 			<h1>Change Password</h1>
 			<div class="form-group">
 				<input id="original" type="password" class="form-control" placeholder="Original Password">
@@ -127,12 +126,12 @@
 				<button class="btn btn-primary">Submit</button>
 			</div>
 		</div>
-		<div class="col-sm-12 col-lg-6"></div>
+		<div class="col-xs-12 col-lg-6"></div>
 	</script>
 
 	<script type="text/template" id="creditCardTemplate">
 		<h1>My Payment Options</h1>
-		<div class="col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-md-6 col-lg-6">
 			<h3>Credit Card Information</h3>
 			<address>
 				<strong>Firstname Lastname</strong><br>
@@ -146,7 +145,7 @@
 			</div>
 			
 		</div>
-		<div class="col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-md-6 col-lg-6">
 			<h3>EZ-PAY</h3>
 			<p>EZ-PAY is the simplest, most economical payment plan. By answering YES here, your payment will be automatically debited or credited to the card of your choice at renewal.
 			
@@ -186,7 +185,7 @@
 	</script>
 
 	<script type="text/template" id="editCreditCardTemplate">
-		<div class="col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-lg-6">
 			<h3>Edit Credit Card</h3>
 			<div class="form-group">
 				<input type="text" class="form-control" placeholder="Name on card">
@@ -196,7 +195,7 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-12 col-lg-6">
+				<div class="col-xs-12 col-lg-6">
 					<div class="form-group">
 						<select class="form-control">
 							<option select>Expiration Month</option>
@@ -207,7 +206,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="col-sm-12 col-lg-6">
+				<div class="col-xs-12 col-lg-6">
 					<div class="form-group">
 						<select class="form-control">
 							<option select>Expiration Year</option>
@@ -241,7 +240,7 @@
 				<button id="submitBtn" class="btn btn-primary">Submit</button>
 			</div>
 		</div>
-		<div class="col-sm-12 col-lg-6"></div>
+		<div class="col-xs-12 col-lg-6"></div>
 	</script>
 
 
@@ -257,7 +256,7 @@
 	</script>
 
 	<script type="text/template" id="subscriptionsTemplate">
-		<div class="col-sm-12 col-lg-12">
+		<div class="col-xs-12 col-lg-12">
 			<h1>Subscription Template</h1>
 			<table class="table">
 				<thead>
@@ -281,7 +280,7 @@
 	</script>
 
 	<script type="text/template" id="accountTableTemplate">
-		<div class="col-sm-12 col-lg-12">
+		<div class="col-xs-12 col-lg-12">
 			<h1>Account History</h1>
 			<table class="table table-striped table-condensed">
 				<thead>
@@ -298,7 +297,7 @@
 
 
 	<script type="text/template" id="linkPrintTemplate">
-		<div class="col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-lg-6">
 			<h1>Link Print Subscription</h1>
 			<div class="form-group">
 				<input id="email" type="text" class="form-control" placeholder="Print Account #">
@@ -310,12 +309,12 @@
 			<button id="loginBtn" class="btn btn-primary">Link my accounts</button>
 			</div>
 		</div>
-		<div class="col-sm-12 col-lg-6"></div>
+		<div class="col-xs-12 col-lg-6"></div>
 	</script>
 
 
 	<script type="text/template" id="loginTemplate">
-		<div class="col-sm-12 col-lg-6">
+		<div class="col-xs-12 col-lg-6">
 			<h1>Login:</h1>
 			<div class="form-group">
 				<input id="email" type="text" class="form-control" placeholder="Email Address">
@@ -327,7 +326,7 @@
 			<button id="loginBtn" class="btn btn-primary">Login</button>
 			</div>
 		</div>
-		<div class="col-sm-12 col-lg-6"></div>
+		<div class="col-xs-12 col-lg-6"></div>
 	</script>
 	
 
@@ -335,7 +334,7 @@
 	<script src="js/vendor/bootstrap.js"></script>
 	<script src="js/vendor/underscore.js"></script>
 	<script src="js/vendor/backbone.js"></script>
-	<script src="js/vendor/backbone.marionette.min.js"></script>
+	<script src="js/vendor/backbone.marionette-1.1.min.js"></script>
 	<script src="js/vendor/jquery.cookie.js"></script>
 	<script src="js/app/app.js"></script>
 

@@ -67,7 +67,8 @@ var LoginView = Backbone.Marionette.ItemView.extend({
 	template: '#loginTemplate',
 	className: 'row',
 	events: {
-		'click #loginBtn' : 'loginUser'
+		'click #loginBtn' : 'loginUser',
+		'keypress input': 'onEnter'
 	},
 	initialize: function(){
 		var hasCookie = Boolean($.cookie(PGProfile.cookieName));
@@ -79,6 +80,10 @@ var LoginView = Backbone.Marionette.ItemView.extend({
 	ui: {
 		email: '#email',
 		pass: '#pass'
+	},
+	onEnter: function(e){
+		if (e.keyCode != 13) return;
+		this.loginUser();
 	},
 	removeAlerts: function(){
 
@@ -536,7 +541,7 @@ PGProfile.Controller = Marionette.Controller.extend({
 	},
 	myProfile: function(){
 		//PGProfile.checkStatus();
-		//PGProfile.appLayout.navView.show(PGProfile.navLayout);
+		PGProfile.appLayout.navView.show(PGProfile.navLayout);
 		PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
 		PGProfile.appLayout.mainView.show(PGProfile.profileLayout);
 	},

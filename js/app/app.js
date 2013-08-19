@@ -124,11 +124,51 @@ var NavView = Backbone.Marionette.ItemView.extend({
 	template: '#navTemplate',
 	className: 'navbar',
 	events: {
-		'click #logout': 'logmeout'
+		'click #logout': 'logmeout',
+		'click #profile' : 'showProfile',
+		'click #password' : 'showPassword',
+		'click #history' : 'showHistory',
+		'click #link' : 'showLink',
+		'click #credit' : 'showCredit',
+		'click #subscription' : 'showSubscription'
 	},
 	logmeout: function(e){
 		e.preventDefault();
 		PGProfile.navLogout();
+	},
+	changeActive: function(element){
+		$(element).parent().addClass('active').siblings().removeClass('active');
+		$('.navbar-toggle').trigger('click');
+	},
+	showProfile: function(e){
+		e.preventDefault();
+		PGProfile.navProfile();
+		this.changeActive(e.currentTarget);
+	},
+	showPassword: function(e){
+		e.preventDefault();
+		PGProfile.navPass();
+		this.changeActive(e.currentTarget);
+	},
+	showHistory: function(e){
+		e.preventDefault();
+		PGProfile.navHist();
+		this.changeActive(e.currentTarget);
+	},
+	showLink: function(e){
+		e.preventDefault();
+		PGProfile.navLink();
+		this.changeActive(e.currentTarget);
+	},
+	showCredit: function(e){
+		e.preventDefault();
+		PGProfile.navCredit();
+		this.changeActive(e.currentTarget);
+	},
+	showSubscription: function(e){
+		e.preventDefault();
+		PGProfile.navSub();
+		this.changeActive(e.currentTarget);
 	}
 });
 

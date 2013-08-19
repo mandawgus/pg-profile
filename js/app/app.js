@@ -30,6 +30,9 @@ var PGProfile = new Backbone.Marionette.Application({
 	navLogout: function(){
 		PGProfile.router.navigate("logout", true);
 	},
+	navLogin: function(){
+		PGProfile.router.navigate("login", true);
+	},
 	checkStatus: function(){
 		console.log("check status");
 	}
@@ -575,19 +578,6 @@ PGProfile.on("initialize:after", function(){
 });
 
 PGProfile.Controller = Marionette.Controller.extend({
-	index: function(){
-		PGProfile.checkStatus();
-		PGProfile.appLayout.navView.show(PGProfile.navLayout);
-		if ($.cookie(PGProfile.cookieName)){
-			PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
-			PGProfile.appLayout.mainView.show(PGProfile.profileLayout);
-
-		} else {
-			window.location.hash = '';
-			PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
-			return this;
-		}
-	},
 	login: function(){
 		PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
@@ -643,13 +633,8 @@ PGProfile.Controller = Marionette.Controller.extend({
 });
 
 PGProfile.Router = Marionette.AppRouter.extend({
-	initialize: function(){
-		console.log(window.location.hash);
-		window.location.hash = '';
-		return this;
-	},
 	appRoutes: {
-		"": "index",
+		"": "login",
 		"login": "login",
 		"profile": "myProfile",
 		"profile/edit": "editProfile",
@@ -661,6 +646,16 @@ PGProfile.Router = Marionette.AppRouter.extend({
 		"subscription": "subscription",
 		"logout": "logout",
 		"test": "test"
+	},
+	before: function( route, params ){
+		if (route === "profile"){ console.log("boommm")}
+		
+		if (!$.cookie(PGProfile.cookieName)){
+			PGProfile.navLogin();
+			PGProfile.appLayout.navView.show(PGProfile.navLayout);
+			PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
+			return false;
+		}
 	}
 });
 

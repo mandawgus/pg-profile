@@ -32,9 +32,6 @@ var PGProfile = new Backbone.Marionette.Application({
 	},
 	navLogin: function(){
 		PGProfile.router.navigate("login", true);
-	},
-	checkStatus: function(){
-		console.log("check status");
 	}
 });
 
@@ -358,186 +355,6 @@ PGProfile.addInitializer(function(){
 		{id: 1237, details: "Details...", timestamp: new Date()}
 	];
 
-	/*
-	var exampleSubscriptionsData = [
-		{
-			"planID": 5,
-			"isActive": true,
-			"baseRate": 4.95,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "4d",
-			"planLength": 0,
-			"planName": "Weekender Print with Full Digital Access",
-			"planTerm": "Weeks(s)",
-			"publication": "pit",
-			"requiresCardOnFile": true,
-			"totalCost": 4.95,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 3,
-			"isActive": true,
-			"baseRate": 3.95,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "5d",
-			"planLength": 0,
-			"planName": "Digital Only",
-			"planTerm": "Weeks(s)",
-			"publication": "pit",
-			"requiresCardOnFile": true,
-			"totalCost": 3.95,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 8,
-			"isActive": false,
-			"baseRate": 0,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "5day",
-			"planLength": 0,
-			"planName": "5Day Print with Full Digital Access",
-			"planTerm": "Weeks(s)",
-			"publication": "pit",
-			"requiresCardOnFile": false,
-			"totalCost": 0,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 9,
-			"isActive": false,
-			"baseRate": 0,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "6day",
-			"planLength": 0,
-			"planName": "6Day Print with Full Digital Access",
-			"planTerm": "Weeks(s)",
-			"publication": "pit",
-			"requiresCardOnFile": false,
-			"totalCost": 0,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 10,
-			"isActive": false,
-			"baseRate": 0,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "7d",
-			"planLength": 0,
-			"planName": "Digital Only w/Steelers App",
-			"planTerm": "Month(s)",
-			"publication": "pit",
-			"requiresCardOnFile": false,
-			"totalCost": 0,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 2,
-			"isActive": true,
-			"baseRate": 5.95,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "7day",
-			"planLength": 0,
-			"planName": "7Day Print with Full Digital Access",
-			"planTerm": "Weeks(s)",
-			"publication": "pit",
-			"requiresCardOnFile": true,
-			"totalCost": 5.95,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 11,
-			"isActive": true,
-			"baseRate": 0,
-			"description": "Steelers, Pens (not avail), Pirates (not avail)",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "App1",
-			"planLength": 0,
-			"planName": "Sports App Bundle",
-			"planTerm": "Month(s)",
-			"publication": "pit",
-			"requiresCardOnFile": false,
-			"totalCost": 0,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 7,
-			"isActive": true,
-			"baseRate": 3.95,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "SS",
-			"planLength": 0,
-			"planName": "Sat/Sun Print with Full Digital Access",
-			"planTerm": "Weeks(s)",
-			"publication": "pit",
-			"requiresCardOnFile": true,
-			"totalCost": 3.95,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 4,
-			"isActive": true,
-			"baseRate": 2.95,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "SU",
-			"planLength": 0,
-			"planName": "Sunday Only Print with Full Digital Access",
-			"planTerm": "Weeks(s)",
-			"publication": "pit",
-			"requiresCardOnFile": true,
-			"totalCost": 2.95,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 1,
-			"isActive": true,
-			"baseRate": 0.1,
-			"description": "This is a test plan",
-			"fullPubName": "Test Pub For Whiz DONT CHANGE (P1)",
-			"planCode": "TEST",
-			"planLength": 5,
-			"planName": "TestPlan",
-			"planTerm": "Day(s)",
-			"publication": "P1",
-			"requiresCardOnFile": true,
-			"totalCost": 0.1,
-			"offerToPrintSubscribers": false,
-			"offerToDigitalSubscribers": true
-		},
-		{
-			"planID": 6,
-			"isActive": true,
-			"baseRate": 3.95,
-			"description": "",
-			"fullPubName": "Pittsburgh (pit)",
-			"planCode": "TS",
-			"planLength": 0,
-			"planName": "Thu/Sunday Print with Full Digital Access",
-			"planTerm": "Weeks(s)",
-			"publication": "pit",
-			"requiresCardOnFile": true,
-			"totalCost": 3.95,
-			"offerToPrintSubscribers": true,
-			"offerToDigitalSubscribers": true
-		}
-	];
-	*/
 
 	PGProfile.loggedInModel = new LoggedInStatus();
 	//PGProfile.subscriptions = new Subscriptions(exampleSubscriptionsData);
@@ -564,6 +381,9 @@ PGProfile.addInitializer(function(){
 			mainView: '#main-view',
 			sideView: '#side-view',
 			navView: '#nav-view'
+		},
+		initialize: function(options){
+			console.log(this);
 		}
 	});
 
@@ -579,47 +399,37 @@ PGProfile.on("initialize:after", function(){
 
 PGProfile.Controller = Marionette.Controller.extend({
 	login: function(){
-		PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
 	},
 	myProfile: function(){
-		//PGProfile.checkStatus();
 		PGProfile.appLayout.navView.show(PGProfile.navLayout);
 		PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
 		PGProfile.appLayout.mainView.show(PGProfile.profileLayout);
 	},
 	editProfile: function(){
-		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.editProfileLayout);
 	},
 	password: function(){
-		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.changePassLayout);
 	},
 	accountHistory: function(){
-		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.accountHistoryLayout);
 		PGProfile.acctHistory.fetch();
 	},
 	linkAccount: function(){
-		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.linkPrintLayout);
 	},
 	creditCard: function(){
-		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.creditCardLayout);
 	},
 	goeditCard: function(){
-		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.editCreditCardLayout);
 	},
 	subscription: function(){
-		//PGProfile.checkStatus();
 		PGProfile.appLayout.mainView.show(PGProfile.subscriptionsLayout);
 		PGProfile.subscriptions.fetch();
 	},
 	logout: function(){
-		//PGProfile.checkStatus();
 		$.cookie(PGProfile.cookieName, "", {expires: 7, path: '/'});
 		PGProfile.loggedInModel.set({status: false, firstname: "", lastname: ""});
 		PGProfile.appLayout.sideView.close();
@@ -655,6 +465,13 @@ PGProfile.Router = Marionette.AppRouter.extend({
 			PGProfile.appLayout.navView.show(PGProfile.navLayout);
 			PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
 			return false;
+		} else {
+			if ($('#nav-view').children().length < 1){
+				PGProfile.appLayout.navView.show(PGProfile.navLayout);
+			}
+			if ($('#side-view').children().length < 1){
+				PGProfile.appLayout.sideView.show(PGProfile.sideLayout);
+			}
 		}
 	}
 });

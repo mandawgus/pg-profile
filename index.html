@@ -3,6 +3,7 @@
 
 <head>
 	<title>PG Profile</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="css/vendor/font-awesome.min.css">
 	<link rel="styleshee" type="text/css" href="css/vendor/bootstrap.flatly.min.css">
@@ -24,15 +25,18 @@
 	<script type="text/template" id="navTemplate">
 		<nav class="navbar navbar-fixed-top" role="navigation">
 			<div class="navbar-header">
+				<% if (status) { %>
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
+				<% } %>
 				<a class="navbar-brand" href="#">My Post-Gazette Profile</a>
 			</div>
 
+			<% if (status) { %>
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav visible-xs">
 					<li class="active"><a href="#">My Profile</a></li>
@@ -48,6 +52,7 @@
 					<li><a id="logout" href="#" class="text-danger">Logout <i class="icon-off"></i></a></li>
 				</ul>
 			</div>
+			<% } %>
 		</nav>
 	</script>
 
@@ -329,6 +334,29 @@
 		</div>
 		<div class="col-xs-12 col-lg-6"></div>
 	</script>
+
+	<script type="text/template" id="wizard">
+		<div id="MyWizard" class="wizard">
+			<ul class="steps">
+				<li data-target="#step1" class="active"><span class="badge badge-info">1</span>Step 1<span class="chevron"></span></li>
+				<li data-target="#step2"><span class="badge">2</span>Step 2<span class="chevron"></span></li>
+				<li data-target="#step3"><span class="badge">3</span>Step 3<span class="chevron"></span></li>
+				<li data-target="#step4"><span class="badge">4</span>Step 4<span class="chevron"></span></li>
+				<li data-target="#step5"><span class="badge">5</span>Step 5<span class="chevron"></span></li>
+			</ul>
+			<div class="actions">
+				<button type="button" class="btn btn-mini btn-prev"> <i class="icon-arrow-left"></i>Prev</button>
+				<button type="button" class="btn btn-mini btn-next" data-last="Finish">Next<i class="icon-arrow-right"></i></button>
+			</div>
+		</div>
+		<div class="step-content">
+			<div class="step-pane active" id="step1">This is step 1</div>
+			<div class="step-pane" id="step2">This is step 2</div>
+			<div class="step-pane" id="step3">This is step 3</div>
+			<div class="step-pane" id="step4">This is step 4</div>
+			<div class="step-pane" id="step5">This is step 5</div>
+		</div>
+	</script>
 	
 
 	<script src="js/vendor/jquery-1.10.2.min.js"></script>
@@ -337,6 +365,7 @@
 	<script src="js/vendor/backbone.js"></script>
 	<script src="js/vendor/backbone.marionette-1.1.min.js"></script>
 	<script src="js/vendor/jquery.cookie.js"></script>
+	<script src="js/vendor/wizard.js"></script>
 	<script src="js/app/app.js"></script>
 
 </body>

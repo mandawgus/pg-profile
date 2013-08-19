@@ -32,7 +32,6 @@ var PGProfile = new Backbone.Marionette.Application({
 	},
 	checkStatus: function(){
 		console.log("check status");
-		
 	}
 });
 
@@ -290,6 +289,12 @@ var AccountTableView = Backbone.Marionette.CompositeView.extend({
 	itemViewContainer: 'tbody'
 });
 
+var WizardView = Backbone.Marionette.ItemView.extend({
+	template: '#wizard',
+	onRender: function(){
+		$('#myWizard').wizard();
+	}
+});
 
 
 PGProfile.addInitializer(function(){
@@ -502,6 +507,7 @@ PGProfile.addInitializer(function(){
 	PGProfile.accountHistoryLayout = new AccountTableView({collection: PGProfile.acctHistory});
 	PGProfile.linkPrintLayout = new LinkPrintView({collection: PGProfile.loggedInStatus});
 
+	PGProfile.wizard = new WizardView();
 
 	PGProfile.AppLayout = Marionette.Layout.extend({
 		regions: {
@@ -583,6 +589,9 @@ PGProfile.Controller = Marionette.Controller.extend({
 		PGProfile.appLayout.mainView.show(PGProfile.loginLayout);
 		location.reload();
 		return this;
+	},
+	test: function(){
+		PGProfile.appLayout.mainView.show(PGProfile.wizard);
 	}
 });
 
@@ -603,7 +612,8 @@ PGProfile.Router = Marionette.AppRouter.extend({
 		"cc": "creditCard",
 		"cc/edit": "goeditCard",
 		"subscription": "subscription",
-		"logout": "logout"
+		"logout": "logout",
+		"test": "test"
 	}
 });
 

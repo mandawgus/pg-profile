@@ -50,13 +50,18 @@ var LoggedInStatus = Backbone.Model.extend({
 var AccountHist = Backbone.Model.extend({});
 var AccountHistCollection = Backbone.Collection.extend({
 	model: AccountHist,
+	//url: 'http://pay.ppgnow.com/userapi/1/user/get/'
 	url: 'https://stage.syncaccess.net/po/pit/api/svcs/availableplans?format=json'
 });
 
 var Subscription = Backbone.Model.extend({});
 var Subscriptions = Backbone.Collection.extend({
 	model: Subscription,
-	url: 'https://stage.syncaccess.net/po/pit/api/svcs/availableplans?format=json'
+	url: 'https://stage.syncaccess.net/po/pit/api/svcs/availableplans?format=json&callback=?',
+	parse: function(response){
+		console.log(response);
+		return response;
+	}
 });
 
 
@@ -264,6 +269,7 @@ var LinkPrintView = Backbone.Marionette.ItemView.extend({
 var ErrorView = Backbone.Marionette.ItemView.extend({
 	template: '#noSubs'
 });
+
 var SubscriptionView = Backbone.Marionette.ItemView.extend({
 	template: '#subscriptionTemplate',
 	tagName: 'tr'
@@ -274,8 +280,6 @@ var SubscriptionsView = Backbone.Marionette.CompositeView.extend({
 	itemView: SubscriptionView,
 	itemViewContainer: "tbody"
 });
-
-
 
 
 var AccountRowView = Backbone.Marionette.ItemView.extend({
@@ -311,6 +315,7 @@ PGProfile.addInitializer(function(){
 		{id: 1237, details: "Details...", timestamp: new Date()}
 	];
 
+	/*
 	var exampleSubscriptionsData = [
 		{
 			"planID": 5,
@@ -489,9 +494,11 @@ PGProfile.addInitializer(function(){
 			"offerToDigitalSubscribers": true
 		}
 	];
+	*/
 
 	PGProfile.loggedInModel = new LoggedInStatus();
-	PGProfile.subscriptions = new Subscriptions(exampleSubscriptionsData);
+	//PGProfile.subscriptions = new Subscriptions(exampleSubscriptionsData);
+	PGProfile.subscriptions = new Subscriptions();
 	PGProfile.acctHistory = new AccountHistCollection(exampleAccountData);
 
 	//Views

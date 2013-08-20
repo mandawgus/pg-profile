@@ -359,6 +359,7 @@ var EditCreditCardView = Backbone.Marionette.ItemView.extend({
 	},
 	events: {
 		'change': 'change',
+		'keyup #billing_zip': 'zippopotamus',
 		'click #cancelBtn': 'cancelChange',
 		'click #sameAddrBox': 'useSameAddr',
 		'click #submitBtn': 'setChange'
@@ -367,6 +368,23 @@ var EditCreditCardView = Backbone.Marionette.ItemView.extend({
 		this.delegateEvents();
 	},
 	initialize: function(){},
+	zippopotamus: function(event){
+		event.preventDefault();
+		var self = this;
+		var target = event.target;
+		if( target.value.length === 5){
+			console.log("zippopotamus");
+			$.get('http://api.zippopotam.us/us/'+target.value, function(data){
+				console.log(data, data.places[0]['place name']);
+				$(self.ui.billing_city).val(data.places[0]['place name']);
+				$(self.ui.billing_state).val(data.places[0]['state abbreviation']);
+				self.model.set({
+					billing_state: data.places[0]['state abbreviation'],
+					billing_city: data.places[0]['place name']
+				});
+			});
+		}
+	},
 	change: function (event) {
 		var self = this;
 
@@ -438,6 +456,9 @@ var EditCreditCardView = Backbone.Marionette.ItemView.extend({
 		return false;
 	},
 	submitChanges: function(e){
+		this.model.unset("sameAddrBox", {silent: true});
+		console.log(this.model);
+		/*
 		this.model.save({
 			success: function(){
 				alert("success");
@@ -446,6 +467,7 @@ var EditCreditCardView = Backbone.Marionette.ItemView.extend({
 				console.log("error");
 			}
 		});
+*/
 	}
 });
 

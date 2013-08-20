@@ -194,16 +194,16 @@
 		<div class="col-xs-12 col-lg-6">
 			<h3>Edit Credit Card</h3>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Name on card">
+				<input id="card_name" name="card_name" type="text" class="form-control" placeholder="Name on card">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Card Number">
+				<input id="card_number" name="card_number" type="text" class="form-control" placeholder="Card Number">
 			</div>
 			
 			<div class="row">
 				<div class="col-xs-12 col-lg-6">
 					<div class="form-group">
-						<select class="form-control">
+						<select id="card_exp_month" name="card_exp_month" class="form-control">
 							<option select>Expiration Month</option>
 							<option>2</option>
 							<option>3</option>
@@ -214,7 +214,7 @@
 				</div>
 				<div class="col-xs-12 col-lg-6">
 					<div class="form-group">
-						<select class="form-control">
+						<select id="card_exp_year" name="card_exp_year" class="form-control">
 							<option select>Expiration Year</option>
 							<option>2</option>
 							<option>3</option>
@@ -227,19 +227,19 @@
 
 			<h3>Billing Address</h3>
 			<div class="form-group">
-				<input id="sameAsProfile" type="checkbox"> Use address on file
+				<input id="sameAddrBox" id="sameAsProfile" type="checkbox"> Use address on file
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Address">
+				<input id="billing_addr" name="billing_addr" type="text" class="form-control" placeholder="Address">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="City">
+				<input id="billing_city" name="billing_city" type="text" class="form-control" placeholder="City">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="State">
+				<input id="billing_state" name="billing_state" type="text" class="form-control" placeholder="State">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Zipcode">
+				<input id="billing_zip" name="billing_zip" type="text" class="form-control" placeholder="Zipcode">
 			</div>
 			<div class="form-group">
 				<button id="cancelBtn" class="btn btn-danger">Cancel</button>
@@ -366,7 +366,9 @@
 	<script src="js/vendor/backbone.marionette-1.1.min.js"></script>
 	<script src="js/vendor/backbone.routefilter.min.js"></script>
 	<script src="js/vendor/jquery.cookie.js"></script>
+	<script src="js/vendor/jquery.creditCardValidator.js"></script>
 	<script src="js/vendor/wizard.js"></script>
+	<script src="js/app/utils.js"></script>
 	<script src="js/app/app.js"></script>
 
 </body>

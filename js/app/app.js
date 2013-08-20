@@ -397,22 +397,23 @@ var EditCreditCardView = Backbone.Marionette.ItemView.extend({
 		var change = {};
 
 		if (target.name === "card_number"){
-		
+
 			$(target).validateCreditCard(function(result){
+
+				var check = self.model.validateItem(target.id);
+
 				if (result.luhn_valid && result.length_valid){
 					console.log(result);
 					//self.model.set({card_number: $(self.ui.card_number).val()});
 					change[target.name] = target.value;
 					self.model.set(change);
 
-					var check = self.model.validateItem(target.id);
 					if(check.isValid === false){
 						utils.addValidationError(target.id, check.message);
 					} else {
 						utils.removeValidationError(target.id);
 					}
 				} else {
-					var check = self.model.validateItem(target.id);
 					if(check.isValid === false){
 						utils.addValidationError(target.id, check.message);
 					} else {
@@ -420,11 +421,11 @@ var EditCreditCardView = Backbone.Marionette.ItemView.extend({
 					}
 				}
 			},{ accept: ['visa', 'mastercard', 'amex', 'discover']});
-		
+
 		} else {
 			change[target.name] = target.value;
 			this.model.set(change);
-			
+
 			// Run validation rule (if any) on changed item
 			var check = this.model.validateItem(target.id);
 			if (check.isValid === false) {
@@ -467,7 +468,7 @@ var EditCreditCardView = Backbone.Marionette.ItemView.extend({
 				console.log("error");
 			}
 		});
-*/
+		*/
 	}
 });
 
